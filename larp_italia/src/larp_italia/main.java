@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 import larp_italia.views.Frame;
 
-public class Main {
+public class main {
 	
 	public static void main(String[] args) {
 		//Login_Frame log = new Login_Frame("Login Larp Italia");
@@ -12,7 +12,5 @@ public class Main {
 		
 		Frame log = new Frame(db);
 	}
-	
-	Login_Frame log = new Login_Frame("Login");
 	
 }

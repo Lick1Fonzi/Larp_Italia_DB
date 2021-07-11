@@ -9,13 +9,13 @@ public class User {
         DIPENDENTE
     }
     
-    String cf;
-    String email;
-    String cellulare;
-    String nome;
-    String cognome;
+    private String cf;
+    private String email;
+    private String cellulare;
+    private String nome;
+    private String cognome;
     types type = types.GIOCATORE;
-    int id;
+    //int id;
     
     public User(){}
     
@@ -39,9 +39,6 @@ public class User {
         return cognome;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public types getType() {
         return type;
@@ -73,8 +70,4 @@ public class User {
         this.type = type;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    
 }
