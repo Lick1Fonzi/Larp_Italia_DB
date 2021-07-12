@@ -18,6 +18,7 @@ public class DB{
         
     private User user = new User();
     private Connection c;
+    private String tabella;
     
     private Statement st;
 
@@ -32,9 +33,17 @@ public class DB{
                     e.printStackTrace();	
 		}
 	}
-    public boolean login(String cf){
+    public boolean login(String cf,boolean dipendente){
         System.out.println("Login with cf: "+cf);
-        String query = (" select * from persona where cf = " +"'"+ cf + "'");
+        if(dipendente) {
+        	tabella = "dipendente";
+        	this.user.setType(User.types.DIPENDENTE);
+        }
+        else {
+        	tabella = "giocatore";
+        	this.user.setType(User.types.GIOCATORE);
+        }
+        String query = (" select * from "+tabella+" where cf = " +"'"+ cf + "'");
         int empty = 0;
 
         try {
@@ -45,9 +54,11 @@ public class DB{
         		this.user.setNome(res.getString("nome"));
         		this.user.setCognome(res.getString("cognome"));
         		this.user.setCf(res.getString("cf"));
-        		//this.user.setEmail(res.getString("email"));
         		this.user.setCellulare(res.getString("cellulare"));
-        		
+        		if(dipendente)
+        			this.user.setStipendio(res.getInt("stipendio"));
+        		else
+        			this.user.setEmail(res.getString("email"));
         	}
 		} catch (SQLException e) {
 			e.printStackTrace();

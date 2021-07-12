@@ -14,8 +14,8 @@ public class User {
     private String cellulare;
     private String nome;
     private String cognome;
-    types type = types.GIOCATORE;
-    //int id;
+    private int stipendio;
+    private types type;
     
     public User(){}
     
@@ -69,5 +69,13 @@ public class User {
     public void setType(types type) {
         this.type = type;
     }
+
+	public int getStipendio() {
+		return stipendio;
+	}
+
+	public void setStipendio(int stipendio) {
+		this.stipendio = stipendio;
+	}
 
 }

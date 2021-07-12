@@ -20,9 +20,9 @@ public class Frame extends JFrame{
     DipendentePanel dp;
     GiocatorePanel gp;
     
-    public Frame(DB db) {
+    public Frame() {
         super("Login with CF");
-        this.db = db;
+        db = new DB();
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
