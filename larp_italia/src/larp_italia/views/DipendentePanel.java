@@ -6,6 +6,9 @@
 package larp_italia.views;
 
 import javax.swing.JPanel;
+
+import larp_italia.DB;
+
 import javax.swing.JLabel;
 /**
  *
@@ -14,7 +17,7 @@ import javax.swing.JLabel;
 public class DipendentePanel extends JPanel{
     Frame mainFrame;
     
-    public DipendentePanel(Frame mainFrame){
+    public DipendentePanel(Frame mainFrame,DB db){
         this.mainFrame = mainFrame;
 
         JLabel dipendente = new JLabel("Dipendente");

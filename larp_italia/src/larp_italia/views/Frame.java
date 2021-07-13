@@ -34,10 +34,10 @@ public class Frame extends JFrame{
     public void switchPanel(types type){
         this.remove(lp);
         if(type == types.GIOCATORE){
-            gp = new GiocatorePanel(this);
+            gp = new GiocatorePanel(this,db);
             this.add(gp);
         }else{
-            dp = new DipendentePanel(this);
+            dp = new DipendentePanel(this,db);
             this.add(dp);
         }
         this.invalidate();
