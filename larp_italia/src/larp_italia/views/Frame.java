@@ -43,4 +43,8 @@ public class Frame extends JFrame{
         this.invalidate();
         this.validate();
     }
+    
+    public DB getdb() {
+    	return this.db;
+    }
 }

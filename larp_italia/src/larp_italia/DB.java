@@ -85,7 +85,10 @@ public class DB{
     	ArrayList<Evento> lista = new ArrayList<Evento>();
     	try {
 			st = this.c.createStatement();
-			query = "select * from evento where data_inizio > current_date order by data_inizio;";
+			if(this.getUser().getType().equals(User.types.GIOCATORE))
+				query = "select * from evento where data_inizio > current_date order by data_inizio;";
+			else
+				query = "select * from evento";
 			ResultSet res = st.executeQuery(query);
 			while(res.next()) {
 				Evento temp = new Evento();
@@ -126,6 +129,16 @@ public class DB{
     		e.printStackTrace();
     	}
     	return lista;
+    }
+    
+    public void insert_evento(String tit,String nom,String in,String fin,String costo, String limite,String ind) {
+    	try {
+			st = this.c.createStatement();
+			query = "insert into evento values ('"+ tit +"','"+nom+"',"+"to_date('"+in+"' , 'YYYY-MMDD'),"+"to_date('"+fin+"' , 'YYYY-MMDD'),"+limite+","+costo+",'"+ind+"');";
+			st.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
     
     public User getUser(){
