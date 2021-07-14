@@ -96,6 +96,7 @@ public class DB{
 				temp.setNome_campagna(res.getString("nome_campagna"));
 				temp.setInizio(res.getDate("data_inizio"));
 				temp.setFine(res.getDate("data_fine"));
+				temp.setLimite_iscrizione(res.getInt("limite_partecipanti"));
 				temp.setCosto(res.getInt("costo_iscrizione"));
 				temp.setIndirizzo(res.getString("indirizzo_location"));
 				lista.add(temp);
