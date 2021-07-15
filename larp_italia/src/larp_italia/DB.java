@@ -132,6 +132,24 @@ public class DB{
     	return lista;
     }
     
+    public ArrayList<Partecipazioni> getpartecipaz(){
+    	ArrayList<Partecipazioni> lista = new ArrayList<Partecipazioni>();
+    	try {
+			st = this.c.createStatement();
+			query = "select * from partecipa pa, personaggio pe where pa.cf = '"+this.user.getCf()+"' and pa.cod_pg = pe.cod_pg;";
+			ResultSet res = st.executeQuery(query);
+			while(res.next()) {
+				Partecipazioni temp = new Partecipazioni();
+				temp.setCod_pg(res.getString("cod_pg"));
+				temp.setTitolo(res.getString("titolo"));
+				lista.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return lista;
+    }
+    
     public void insert_evento(String tit,String nom,String in,String fin,String costo, String limite,String ind) {
     	try {
 			st = this.c.createStatement();
@@ -140,6 +158,49 @@ public class DB{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    public boolean checkiscritto(String titolo) {
+    	boolean ret = true;
+    	try {
+			st = this.c.createStatement();
+			query = "select * from partecipa p where p.cf = '"+this.user.getCf()+"' and p.titolo =  '"+titolo+"' ;";
+			ResultSet res = st.executeQuery(query);
+			while(res.next())
+				ret = false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return ret;
+    }
+    
+    public ArrayList<Personaggio_npc> getAllPersonaggi(){
+    	ArrayList<Personaggio_npc> lista = new ArrayList<Personaggio_npc>();
+    	try {
+    	st = this.c.createStatement();
+    	query = "select * from personaggio;";
+		ResultSet res = st.executeQuery(query);
+		while(res.next()) {
+			Personaggio_npc temp = new Personaggio_npc();
+			temp.setNome(res.getString("nome"));
+			temp.setCodice(res.getInt("cod_pg"));
+			lista.add(temp);
+		}
+		res.close();
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    	}
+    	return lista;
+    }
+    
+    public void addNewPartecipaz(String cf, String evento, int cod_pg) {
+    	try {
+        	st = this.c.createStatement();
+        	query = "select iscrizione('"+cf+"','"+evento+"',"+Integer.toString(cod_pg)+");";
+    		st.executeUpdate(query);
+        	}catch(SQLException e) {
+        		e.printStackTrace();
+        	}
     }
     
     public User getUser(){

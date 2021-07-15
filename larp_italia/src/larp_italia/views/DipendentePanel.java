@@ -16,6 +16,8 @@ import larp_italia.Personaggio_npc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -63,14 +65,25 @@ public class DipendentePanel extends JPanel{
         int numcol_pers = colname_pers.length;
         npctab = new JTable(this.getDataTableNpc(npc, numcol_pers, colname_pers),colname_pers);
         
+        JButton logout = new JButton("Logout");
+        logout.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				goback();
+			}
+        	
+        });
+        
         npcdisp.add(npctab);
         evdisp.add(evtab);
         evdisp.add(addev);
         tabbedPane.add("Eventi",evdisp);
-        tabbedPane.add("NPC disponibili",npcdisp);
+        tabbedPane.add("NPC interpretati",npcdisp);
         
         this.add(tabbedPane);
         this.add(dipendente);
+        this.add(logout);
         this.setVisible(true);
     }
     
@@ -119,6 +132,11 @@ public class DipendentePanel extends JPanel{
     	frame.add(pan);
     	frame.pack();
     	frame.setVisible(true);
+    }
+    
+    public void goback() {
+    	Frame mainframe = new Frame();
+    	this.mainFrame.dispose();
     }
     
 }
