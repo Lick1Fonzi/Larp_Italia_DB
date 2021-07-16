@@ -14,8 +14,10 @@ import larp_italia.DB;
 import larp_italia.Evento;
 import larp_italia.Partecipazioni;
 import larp_italia.Personaggio_npc;
+import larp_italia.User;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -47,16 +49,28 @@ public class GiocatorePanel extends JPanel{
         eventidisp = db.getEventiDisp();
         npc = db.getPersOrNpc();
         partecip = db.getpartecipaz();
-        JLabel giocatore = new JLabel("Giocatore: " + db.getUser().getCf());
         tabbedPane = new JTabbedPane();
         JPanel evdisp = new JPanel();
         JPanel persdisp = new JPanel();
         JPanel part = new JPanel();
+
+		User user = db.getUser();
+		JPanel userInfo = new JPanel();
+
+		userInfo.setLayout(new GridLayout(3,2));
+
+		userInfo.add(new JLabel("CF Giocatore:",JLabel.CENTER));
+		userInfo.add(new JLabel(user.getCf(),2));
+		userInfo.add(new JLabel("Nome: ",JLabel.CENTER));
+		userInfo.add(new JLabel(user.getNome(),2));
+		userInfo.add(new JLabel("Cognome: ",JLabel.CENTER));
+		userInfo.add(new JLabel(user.getCognome(),2));
         
         String[] columnNames_eventi = {"Titolo","Campagna","Data_inizio","Data_fine","Limite Iscrizioni","Costo","Indirizzo"};
         int numcolonne_eventi = columnNames_eventi.length;
         evtab = new JTable(this.getDataTableEventi(eventidisp, numcolonne_eventi,columnNames_eventi),columnNames_eventi);
-        evtab.addMouseListener((MouseListener) new MouseListener() {
+
+		evtab.addMouseListener((MouseListener) new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -128,9 +142,11 @@ public class GiocatorePanel extends JPanel{
 			
         	
         });
+
         String[] colname_pers = {"Codice Personaggio","Nome","Descrizione","Exp","Tipo"};
         int numcol_pers = colname_pers.length;
         perstab = new JTable(this.getDataTablePersonaggi(npc, numcol_pers, colname_pers),colname_pers);
+
         String[] colname_part = {"Codice personaggio","Titolo evento"};
         int numcol_part = colname_part.length;
         parttab = new JTable(this.getDataTablePartecipazioni(partecip, numcol_part, colname_part),colname_part);
@@ -152,11 +168,11 @@ public class GiocatorePanel extends JPanel{
 			}
         	
         });
-        
-        
-        this.add(tabbedPane);
-        this.add(giocatore,BorderLayout.NORTH);
-        this.add(logout);
+
+		this.setLayout(new GridLayout(3,2));
+		this.add(tabbedPane);
+		this.add(userInfo);
+		this.add(logout);
         this.setVisible(true);
     }
     
@@ -203,8 +219,7 @@ public class GiocatorePanel extends JPanel{
     }
     
     public void goback() {
-    	Frame mainframe = new Frame();
-    	this.mainFrame.dispose();
+    	this.mainFrame.logout();
     }
     
 }

@@ -16,13 +16,13 @@ import larp_italia.Personaggio_npc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import larp_italia.User;
 /**
  *
  * @author giokk
@@ -38,11 +38,22 @@ public class DipendentePanel extends JPanel{
     
     public DipendentePanel(Frame mainFrame,DB db){
         this.mainFrame = mainFrame;
-        JLabel dipendente = new JLabel("Dipendente: "+db.getUser().getCf());
         gp= new GiocatorePanel(mainFrame,db);
         
         eventidisp = db.getEventiDisp();
         npc = db.getPersOrNpc();
+
+		User user = db.getUser();
+		JPanel userInfo = new JPanel();
+
+		userInfo.setLayout(new GridLayout(3,2));
+
+		userInfo.add(new JLabel("CF Giocatore:",JLabel.CENTER));
+		userInfo.add(new JLabel(user.getCf(),2));
+		userInfo.add(new JLabel("Nome: ",JLabel.CENTER));
+		userInfo.add(new JLabel(user.getNome(),2));
+		userInfo.add(new JLabel("Cognome: ",JLabel.CENTER));
+		userInfo.add(new JLabel(user.getCognome(),2));
         
         tabbedPane = new JTabbedPane();
         JPanel evdisp = new JPanel();
@@ -76,13 +87,16 @@ public class DipendentePanel extends JPanel{
         });
         
         npcdisp.add(npctab);
+		evdisp.setLayout(new GridLayout(2,1));
         evdisp.add(evtab);
         evdisp.add(addev);
         tabbedPane.add("Eventi",evdisp);
         tabbedPane.add("NPC interpretati",npcdisp);
         
-        this.add(tabbedPane);
-        this.add(dipendente);
+
+		this.setLayout(new GridLayout(3,2));
+		this.add(tabbedPane);
+		this.add(userInfo);
         this.add(logout);
         this.setVisible(true);
     }
@@ -100,15 +114,17 @@ public class DipendentePanel extends JPanel{
     }
     
     public void add_evento(DB db) {
-    	JFrame frame = new JFrame("Aggiungi evento");
-    	JTextField titolo = new JTextField("titolo");
+    	JFrame frame = new JFrame();
+		frame.setTitle("Aggiungi evento");
+		
+    	JTextField titolo = new JTextField();
     	// per campagna sarebbe meglio scegliere tra campagne esistenti piuttosto che un JTextField, per rispettare vincoli di foreign key
-    	JTextField campagna = new JTextField("Nome_Campagna");
-    	JTextField data_inizio = new JTextField("Data_inizio: AAAA-MMGG");
-    	JTextField data_fine = new JTextField("Data_fine: AAAA-MMGG");
-    	JTextField limite_iscrizioni = new JTextField("Limite iscrizioni");
-    	JTextField costo = new JTextField("Costo iscrizione");
-    	JTextField indirizzo = new JTextField("Indirizzo");
+    	JTextField campagna = new JTextField();
+    	JTextField data_inizio = new JTextField("AAAA-MMGG");
+    	JTextField data_fine = new JTextField("AAAA-MMGG");
+    	JTextField limite_iscrizioni = new JTextField();
+    	JTextField costo = new JTextField();
+    	JTextField indirizzo = new JTextField();
     	JPanel pan = new JPanel();
     	JButton add = new JButton("aggiungi");
     	add.addActionListener(new ActionListener() {
@@ -121,12 +137,20 @@ public class DipendentePanel extends JPanel{
     		
     	});
     	
+		pan.setLayout(new GridLayout(8,2));
+		pan.add(new JLabel("Titolo: "));
     	pan.add(titolo);
+		pan.add(new JLabel("Campagna: "));
     	pan.add(campagna);
+		pan.add(new JLabel("Data Inizio: "));
     	pan.add(data_inizio);
+		pan.add(new JLabel("Data Fine: "));
     	pan.add(data_fine);
+		pan.add(new JLabel("Limite Iscritti: "));
     	pan.add(limite_iscrizioni);
+		pan.add(new JLabel("Costo: "));
     	pan.add(costo);
+		pan.add(new JLabel("Indirizzo: "));
     	pan.add(indirizzo);
     	pan.add(add);
     	frame.add(pan);

@@ -40,6 +40,16 @@ public class Frame extends JFrame{
             dp = new DipendentePanel(this,db);
             this.add(dp);
         }
+        this.pack();
+        this.invalidate();
+        this.validate();
+    }
+    public void logout(){
+        this.getContentPane().removeAll();
+        this.repaint();
+
+        this.add(lp);
+        this.pack();
         this.invalidate();
         this.validate();
     }

@@ -11,8 +11,8 @@ import java.sql.SQLException;
 public class DB{
 	private final static String url = "jdbc:postgresql://localhost:5432/larp_italia";
 	private final static String usr = "postgres";
-	private final static String psw = "kn0wledgeispow3r";// DEN
-    //private final static String psw = "password";// NICO
+	//private final static String psw = "kn0wledgeispow3r";// DEN
+    private final static String psw = "password";// NICO
 	
 	//private final static String usr = "jdbc";
 	//private final static String psw = "jdbc";
