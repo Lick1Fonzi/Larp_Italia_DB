@@ -158,6 +158,7 @@ public class GiocatorePanel extends JPanel{
         this.add(giocatore,BorderLayout.NORTH);
         this.add(logout);
         this.setVisible(true);
+        this.mainFrame.setSize(700, 200);
     }
     
     public Object[][] getDataTableEventi(ArrayList<Evento> arr,int n, String[] colname){

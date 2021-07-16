@@ -85,6 +85,7 @@ public class DipendentePanel extends JPanel{
         this.add(dipendente);
         this.add(logout);
         this.setVisible(true);
+        this.mainFrame.setSize(800, 200);
     }
     
     public Object[][] getDataTableNpc(ArrayList<Personaggio_npc> arr, int n, String[] colname){
