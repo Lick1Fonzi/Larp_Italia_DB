@@ -74,6 +74,17 @@ public class GiocatorePanel extends JPanel{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
 				int rowheight = 15;
 				int nev = e.getY()/rowheight;
 				if(e.getY()>15 && db.checkiscritto(eventidisp.get(nev-1).getTitolo())) {
@@ -113,17 +124,6 @@ public class GiocatorePanel extends JPanel{
 					jp.add(it);
 					jp.show(e.getComponent(),e.getX(), e.getY());
 				}
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
@@ -138,9 +138,6 @@ public class GiocatorePanel extends JPanel{
 				// TODO Auto-generated method stub
 				
 			}
-
-			
-        	
         });
 
         String[] colname_pers = {"Codice Personaggio","Nome","Descrizione","Exp","Tipo"};
